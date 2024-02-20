@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { Context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
 
 import { ContactCard } from "../component/ContactCard.js";
@@ -8,10 +9,19 @@ export const Contacts = () => {
 	const [state, setState] = useState({
 		showModal: false
 	});
+	const { store, actions } = useContext(Context);
+
+	function getAcceder() {
+		// console.log("hola");
+		actions.getDatosAgenda();
+	}
 
 	return (
 		<div className="container">
 			<div>
+				<button className="btn btn-danger" onClick={getAcceder}>
+					hola
+				</button>
 				<p className="text-right my-3">
 					<Link className="btn btn-success" to="/add">
 						Add new contact
