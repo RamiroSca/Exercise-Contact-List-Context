@@ -11,20 +11,17 @@ export const Contacts = () => {
 	});
 	const { store, actions } = useContext(Context);
 
-	function getAcceder() {
-		// console.log("hola");
-		actions.getDatosAgenda();
-	}
 	const handleDelete = () => {
 		setState({ showModal: true });
 	};
 
+	useEffect(() => {
+		actions.getDatosAgenda();
+	}, []);
+
 	return (
 		<div className="container">
 			<div>
-				<button className="btn btn-danger" onClick={getAcceder}>
-					hola
-				</button>
 				<p className="text-right my-3">
 					<Link className="btn btn-success" to="/add">
 						Add new contact
@@ -32,10 +29,18 @@ export const Contacts = () => {
 				</p>
 				<div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
 					<ul className="list-group pull-down" id="contact-list">
-						<ContactCard onDelete={handleDelete} />
-						<ContactCard onDelete={handleDelete} />
-						<ContactCard onDelete={handleDelete} />
-						<ContactCard onDelete={handleDelete} />
+						{store.contactData.map((item, index) => {
+							return (
+								<ContactCard
+									key={index}
+									fullName={item.full_name}
+									email={item.email}
+									phone={item.phone}
+									address={item.address}
+									onDelete={handleDelete}
+								/>
+							);
+						})}
 					</ul>
 				</div>
 			</div>

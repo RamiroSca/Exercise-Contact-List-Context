@@ -7,25 +7,12 @@ export const AddContact = () => {
 	const [email, setEmail] = useState("");
 	const [phone, setPhone] = useState("");
 	const [address, setAddress] = useState("");
-	const { store, setStore } = useContext(Context);
+	const { store, actions } = useContext(Context);
 
 	function bodyAñadirContacto(e) {
 		e.preventDefault();
-
-		let bodyNewContact = {
-			full_name: fullName,
-			email: email,
-			agenda_slug: "Ramiro",
-			address: address,
-			phone: phone
-		};
-		setStore(bodyNewContact);
-
-		prueba();
-	}
-
-	function prueba() {
-		console.log(store.bodyContactoNuevo);
+		actions.creacionContacto(fullName, email, address, phone);
+		// console.log("hola");
 	}
 
 	return (
