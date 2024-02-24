@@ -7,18 +7,18 @@ import { Modal } from "../component/Modal";
 
 export const Contacts = () => {
 	const [state, setState] = useState({
-		showModal: false
+		showModal: false,
+		id: null
 	});
 	const { store, actions } = useContext(Context);
 
-	const handleDelete = () => {
-		setState({ showModal: true });
+	const handleDelete = id => {
+		setState({ showModal: true, id: id });
 	};
 
 	useEffect(() => {
 		actions.getDatosAgenda();
 	}, []);
-
 	return (
 		<div className="container">
 			<div>
@@ -37,14 +37,14 @@ export const Contacts = () => {
 									email={item.email}
 									phone={item.phone}
 									address={item.address}
-									onDelete={handleDelete}
+									onDelete={() => handleDelete(item.id)}
 								/>
 							);
 						})}
 					</ul>
 				</div>
 			</div>
-			<Modal show={state.showModal} onClose={() => setState({ showModal: false })} />
+			<Modal show={state.showModal} id={state.id} onClose={() => setState({ showModal: false })} />
 		</div>
 	);
 };

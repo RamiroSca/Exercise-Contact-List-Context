@@ -7,12 +7,17 @@ export const AddContact = () => {
 	const [email, setEmail] = useState("");
 	const [phone, setPhone] = useState("");
 	const [address, setAddress] = useState("");
+	const [valor, setvalor] = useState("");
 	const { store, actions } = useContext(Context);
 
 	function bodyAñadirContacto(e) {
 		e.preventDefault();
 		actions.creacionContacto(fullName, email, address, phone);
 		// console.log("hola");
+		setFullName("");
+		setEmail("");
+		setAddress("");
+		setPhone("");
 	}
 
 	return (
@@ -26,6 +31,7 @@ export const AddContact = () => {
 							type="text"
 							className="form-control"
 							placeholder="Full Name"
+							value={fullName}
 							onChange={event => setFullName(event.target.value)}
 						/>
 					</div>
@@ -35,6 +41,7 @@ export const AddContact = () => {
 							type="email"
 							className="form-control"
 							placeholder="Enter email"
+							value={email}
 							onChange={event => setEmail(event.target.value)}
 						/>
 					</div>
@@ -44,6 +51,7 @@ export const AddContact = () => {
 							type="phone"
 							className="form-control"
 							placeholder="Enter phone"
+							value={phone}
 							onChange={event => setPhone(event.target.value)}
 						/>
 					</div>
@@ -53,6 +61,7 @@ export const AddContact = () => {
 							type="text"
 							className="form-control"
 							placeholder="Enter address"
+							value={address}
 							onChange={event => setAddress(event.target.value)}
 						/>
 					</div>

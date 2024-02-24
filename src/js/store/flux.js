@@ -42,6 +42,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(data);
 					})
 					.catch(error => console.log(error));
+			},
+			eliminarContacto: function(id) {
+				fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, {
+					method: "delete"
+				})
+					.then(resp => {
+						console.log(resp);
+						console.log(resp.status == 201 ? this.getDatosAgenda() : console.log(resp.status));
+						return resp.json();
+					})
+					.then(data => {
+						console.log(data);
+					})
+					.catch(error => console.log(error));
 			}
 		}
 	};
