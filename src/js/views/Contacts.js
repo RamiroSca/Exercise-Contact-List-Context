@@ -3,6 +3,7 @@ import { Context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
 
 import { ContactCard } from "../component/ContactCard.js";
+import { ModalEdit } from "../component/ModalEdit.js";
 import { Modal } from "../component/Modal";
 
 export const Contacts = () => {
@@ -10,10 +11,21 @@ export const Contacts = () => {
 		showModal: false,
 		id: null
 	});
+	const [stateEdit, setStateEdit] = useState({
+		showModal: false,
+		id: null,
+		fullName: "",
+		email: "",
+		phone: "",
+		address: ""
+	});
 	const { store, actions } = useContext(Context);
 
 	const handleDelete = id => {
 		setState({ showModal: true, id: id });
+	};
+	const handleEdit = (id, fullName, email, phone, address) => {
+		setStateEdit({ showModal: true, id: id, fullName: fullName, email: email, phone: phone, address: address });
 	};
 
 	useEffect(() => {
@@ -37,13 +49,25 @@ export const Contacts = () => {
 									email={item.email}
 									phone={item.phone}
 									address={item.address}
-									onDelete={() => handleDelete(item.id)}
+									onEdit={() => handleEdit(item.id)}
+									onDelete={() =>
+										handleDelete(item.id, item.full_name, item.email, item.phone, item.address)
+									}
 								/>
 							);
 						})}
 					</ul>
 				</div>
 			</div>
+			<ModalEdit
+				show={stateEdit.showModal}
+				id={stateEdit.id}
+				onClose={() => setStateEdit({ showModal: false })}
+				fullName={stateEdit.fullName}
+				email={stateEdit.email}
+				phone={stateEdit.phone}
+				address={stateEdit.address}
+			/>
 			<Modal show={state.showModal} id={state.id} onClose={() => setState({ showModal: false })} />
 		</div>
 	);

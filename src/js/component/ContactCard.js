@@ -13,7 +13,7 @@ export const ContactCard = props => {
 				</div>
 				<div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
 					<div className=" float-right">
-						<button className="btn">
+						<button className="btn" onClick={() => props.onEdit()}>
 							<i className="fas fa-pencil-alt mr-3" />
 						</button>
 						<button className="btn" onClick={() => props.onDelete()}>
@@ -53,6 +53,7 @@ export const ContactCard = props => {
 ContactCard.propTypes = {
 	history: PropTypes.object,
 	onDelete: PropTypes.func,
+	onEdit: PropTypes.func,
 	fullName: PropTypes.string,
 	phone: PropTypes.string,
 	email: PropTypes.string,
@@ -64,5 +65,6 @@ ContactCard.propTypes = {
  * your component's properties
  **/
 ContactCard.defaultProps = {
+	onEdit: null,
 	onDelete: null
 };
