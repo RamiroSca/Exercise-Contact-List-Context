@@ -5,10 +5,7 @@ import PropTypes from "prop-types";
 import propTypes from "prop-types";
 
 export const ModalEdit = props => {
-	const [state, setState] = useState({
-		//initialize state here
-	});
-	const [fullNameNew, setFullNameNew] = useState("");
+	const [fullNameNew, setFullNameNew] = useState(props.fullName);
 	const [emailNew, setEmailNew] = useState("");
 	const [phoneNew, setPhoneNew] = useState("");
 	const [addressNew, setAddressNew] = useState("");
@@ -17,13 +14,14 @@ export const ModalEdit = props => {
 	function editarContacto(e) {
 		e.preventDefault();
 
-		fullNameNew == "" ? setFullNameNew(props.fullName) : undefined;
-		emailNew == "" ? setEmailNew(props.email) : undefined;
-		phoneNew == "" ? setPhoneNew(props.phone) : undefined;
-		addressNew == "" ? setAddressNew(props.address) : undefined;
+		fullNameNew == "" ? setFullNameNew(props.fullName) : console.log(fullNameNew);
+		emailNew == "" ? setEmailNew(props.email) : console.log(emailNew);
+		phoneNew == "" ? setPhoneNew(props.phone) : console.log(phoneNew);
+		addressNew == "" ? setAddressNew(props.address) : console.log(addressNew);
 
 		actions.editarContacto(fullNameNew, emailNew, addressNew, phoneNew, props.id);
 		// console.log("hola");
+		props.onClose();
 		setFullNameNew("");
 		setEmailNew("");
 		setAddressNew("");
@@ -33,27 +31,29 @@ export const ModalEdit = props => {
 	return (
 		<div className="modal" tabIndex="-1" role="dialog" style={{ display: props.show ? "inline-block" : "none" }}>
 			<div className="modal-dialog" role="document">
-				<div className="modal-content">
-					<h1 className="text-center mt-5">Edit contact</h1>
-					{props.onClose ? (
-						<button
-							onClick={() => props.onClose()}
-							type="button"
-							className="close"
-							data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					) : (
-						""
-					)}
+				<div className="modal-content p-3">
+					<div className="d-flex justify-content-between">
+						<h1 className="text-center">Edit contact</h1>
+						{props.onClose ? (
+							<button
+								onClick={() => props.onClose()}
+								type="button"
+								className="close text-danger"
+								data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						) : (
+							""
+						)}
+					</div>
 					<form onSubmit={editarContacto}>
 						<div className="form-group">
 							<label>Full Name</label>
 							<input
 								type="text"
 								className="form-control"
-								placeholder="Full Name"
+								placeholder={props.fullName}
 								value={fullNameNew}
 								onChange={event => setFullNameNew(event.target.value)}
 							/>
@@ -63,7 +63,7 @@ export const ModalEdit = props => {
 							<input
 								type="email"
 								className="form-control"
-								placeholder="Enter email"
+								placeholder={props.email}
 								value={emailNew}
 								onChange={event => setEmailNew(event.target.value)}
 							/>
@@ -73,7 +73,7 @@ export const ModalEdit = props => {
 							<input
 								type="phone"
 								className="form-control"
-								placeholder="Enter phone"
+								placeholder={props.phone}
 								value={phoneNew}
 								onChange={event => setPhoneNew(event.target.value)}
 							/>
@@ -83,56 +83,24 @@ export const ModalEdit = props => {
 							<input
 								type="text"
 								className="form-control"
-								placeholder="Enter address"
+								placeholder={props.address}
 								value={addressNew}
 								onChange={event => setAddressNew(event.target.value)}
 							/>
 						</div>
-						<button
-							type="button"
-							className="btn btn-primary form-control"
-							onClick={() => props.onClose()}
-							data-dismiss="modal">
-							Back
-						</button>
-						<button type="submit" className="btn btn-primary form-control">
-							save
-						</button>
-					</form>
-					{/* <div className="modal-header">
-						<h5 className="modal-title">Are you sure?</h5>
-						{props.onClose ? (
+						<div className="d-flex">
 							<button
-								onClick={() => props.onClose()}
 								type="button"
-								className="close"
-								data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
+								className="btn btn-danger form-control"
+								onClick={() => props.onClose()}
+								data-dismiss="modal">
+								Back
 							</button>
-						) : (
-							""
-						)}
-					</div>
-					<div className="modal-body">
-						<p>Warning: unknown consequences after this point... Kidding!</p>
-					</div>
-					<div className="modal-footer">
-						<button
-							type="button"
-							className="btn btn-primary "
-							onClick={() => props.onClose()}
-							data-dismiss="modal">
-							Oh no!
-						</button>
-						<button
-							type="button"
-							className="btn btn-secondary"
-							data-dismiss="modal"
-							onClick={() => eliminarContacto(props.id)}>
-							Do it!
-						</button>
-					</div> */}
+							<button type="submit" className="btn btn-primary form-control">
+								save
+							</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

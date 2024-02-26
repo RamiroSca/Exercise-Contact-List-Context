@@ -49,10 +49,10 @@ export const Contacts = () => {
 									email={item.email}
 									phone={item.phone}
 									address={item.address}
-									onEdit={() => handleEdit(item.id)}
-									onDelete={() =>
-										handleDelete(item.id, item.full_name, item.email, item.phone, item.address)
+									onEdit={() =>
+										handleEdit(item.id, item.full_name, item.email, item.phone, item.address)
 									}
+									onDelete={() => handleDelete(item.id)}
 								/>
 							);
 						})}
@@ -62,11 +62,11 @@ export const Contacts = () => {
 			<ModalEdit
 				show={stateEdit.showModal}
 				id={stateEdit.id}
-				onClose={() => setStateEdit({ showModal: false })}
 				fullName={stateEdit.fullName}
 				email={stateEdit.email}
 				phone={stateEdit.phone}
 				address={stateEdit.address}
+				onClose={() => setStateEdit({ showModal: false })}
 			/>
 			<Modal show={state.showModal} id={state.id} onClose={() => setState({ showModal: false })} />
 		</div>
