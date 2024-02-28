@@ -14,12 +14,17 @@ export const ModalEdit = props => {
 	function editarContacto(e) {
 		e.preventDefault();
 
-		fullNameNew == "" ? setFullNameNew(props.fullName) : console.log(fullNameNew);
-		emailNew == "" ? setEmailNew(props.email) : console.log(emailNew);
-		phoneNew == "" ? setPhoneNew(props.phone) : console.log(phoneNew);
-		addressNew == "" ? setAddressNew(props.address) : console.log(addressNew);
+		let fullname2 = "";
+		let email2 = "";
+		let phone2 = "";
+		let address2 = "";
 
-		actions.editarContacto(fullNameNew, emailNew, addressNew, phoneNew, props.id);
+		fullNameNew == "" ? (fullname2 = props.fullName) : (fullname2 = fullNameNew);
+		emailNew == "" ? (email2 = props.email) : (email2 = emailNew);
+		phoneNew == "" ? (phone2 = props.phone) : (phone2 = phoneNew);
+		addressNew == "" ? (address2 = props.address) : (address2 = addressNew);
+
+		actions.editarContacto(fullname2, email2, address2, phone2, props.id);
 		// console.log("hola");
 		props.onClose();
 		setFullNameNew("");
